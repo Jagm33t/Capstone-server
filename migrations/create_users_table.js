@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string("last_name").notNullable();
     table.string("email").notNullable().unique();
     table.string("password").notNullable();
+    table.string("confirm_password").notNullable();
     table.string("username").notNullable();
     table.string("phone_number").notNullable();
     table.string("street_number").notNullable();
@@ -13,14 +14,15 @@ exports.up = function (knex) {
     table.string("country").notNullable().defaultTo("Unknown");
     table.string("img").notNullable();
     table.string("balance"); // New column: balance
-    table.string("last_opened"); // New column: lastopened
+    table.string("last_opened"); // New column: last_opened
     table.string("last_payment"); // New column: last_payment
-    table.string("unique_id").unique(); // New column: uniqueid
-    table.date("last_payment_date"); // New column: lastpayment_date
-    table.string("last_month_expense"); // New column: lastmonthexpense
+    table.string("unique_id").unique(); // New column: unique_id
+    table.date("last_payment_date"); // New column: last_payment_date
+    table.string("last_month_expense"); // New column: last_month_expense
     table.timestamps(true, true);
   });
 };
+
 exports.down = function (knex) {
   return knex.schema.dropTable("users");
 };

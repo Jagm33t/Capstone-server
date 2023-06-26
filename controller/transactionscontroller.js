@@ -17,6 +17,23 @@ function getAllTransactions(req, res) {
     });
 }
 
+//Post transaction
+function postToTransaction(req,res){
+  const {amount} = req.body;
+  console.log("amount3" , amount);
+  const currentDate = new Date();
+  knex("transactions")
+  .insert({ amount: amount, type: 'send' ,date: currentDate, company:'jagmeet2' }) 
+  .then((response) =>{
+    return res.status(200).send();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  });
+}
+
 module.exports = {
   getAllTransactions,
+  postToTransaction
 };

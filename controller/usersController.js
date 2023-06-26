@@ -1,6 +1,6 @@
 const knex = require("knex")(require("../knexfile"));
 
-//Get functions
+
 // Get users Details
 const hostPath = "http://localhost:8080/"
 function getSingleUser(req, res) {
@@ -50,6 +50,79 @@ function getSingleUser(req, res) {
         .send(`Error retrieving data for the user ID ${userId}`);
     });
 }
+// update selected user data
+function updateUsers(req, res) {
+  const { first_name, last_name, street_number, province , country , phone_number, email, username, password, confirm_password } = req.body;
+  const userId = req.params.id;
+  const updatedUsers={...req.body};
+  knex('users')
+  .where({ id: userId })
+    .update({
+      first_name,
+      last_name,
+      phone_number,
+      email,
+      username,
+      password,
+      confirm_password,
+      street_number,
+      province ,
+      country 
+    
+    })
+    .then(() => {
+  
+      res.sendStatus(200); 
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to update user profile' });
+    });
+}
+// // Function to update the user's balance in the database
+// function updateBalance(req, res) {
+//   console.log("request", req.body);
+//   const { balance } = req.body;
+//   const userId = req.params.userId;
+
+//   knex('users')
+//     .where('id', userId)
+//     .increment('balance', balance)
+//     .then(() => {
+//       console.log('Balance updated successfully');
+//       res.status(200).json({ message: 'Balance updated successfully' });
+//     })
+//     .catch((error) => {
+//       console.error('Failed to update balance:', error);
+//       res.status(500).json({ message: 'Failed to update balance' });
+//     });
+// };
+
+
+
+
+function updateBalance(req, res) {
+  // const { userId } = req.params;
+  const { balance } = req.body;
+console.log("balance",balance);
+
+  // console.log("userId", userId);
+
+  knex("users")
+    .where("id", 1)
+    .update({ balance })
+    .then(() => {
+      res.sendStatus(200);
+      
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+}
+
 module.exports = {
+  updateUsers,
   getSingleUser,
+  updateBalance
 };
