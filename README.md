@@ -11,10 +11,11 @@ https://github.com/Jagm33t/Capstone
 - Node.js
 - Express
 - Mysql
+- knex
 
-(nodemon, npm, and MySQL already installed.)
+(nodemon, axios,knex,nodemailer and MySQL already installed.)
 ## Set up the backend
-Create a new database in MySQL called users.
+Create a new database in MySQL2 called users.
 
 Install server dependencies:
 
