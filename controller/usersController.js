@@ -153,12 +153,12 @@ function newUsers(req, res) {
       city,
       province,
       country,
-      img:'',
-      balance:'',
+      img:'profilepic.jpeg',
+      balance:'1500',
       last_opened:'',
       last_payment:'',
       last_payment_date:'2023-06-11',
-      last_month_expense:'',
+      last_month_expense:'140',
     };
 
     knex("users")
